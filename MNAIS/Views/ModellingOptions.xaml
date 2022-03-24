@@ -1,0 +1,340 @@
+﻿<UserControl x:Class="MNAIS.Views.ModellingOptions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:comboBox="clr-namespace:MNAIS;assembly=MultiSelectComboBox"
+             xmlns:local="clr-namespace:MNAIS"             
+             Width="Auto" Height="Auto">
+
+    <UserControl.Resources>
+
+        <Style x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <Border Name="Border"
+          Background="AliceBlue"
+          BorderBrush="Black"          
+          BorderThickness="1"
+          Width="{TemplateBinding Width}"
+          Height="{TemplateBinding Height}">
+                            <ContentPresenter                                
+            Margin="4" 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasDropShadow" Value="true">
+                                <Setter TargetName="Border" Property="CornerRadius" Value="4"/>
+                                <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="Red" BorderThickness="2">
+                            <AdornedElementPlaceholder Name="MyAdorner" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, 
+                       Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <VisualBrush Stretch="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock Text="Enter value" Foreground="Gray"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="{x:Null}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <VisualBrush Stretch="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock Text="Enter value" Foreground="Gray"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsFocused}" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <VisualBrush Stretch="None">
+                            </VisualBrush>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+    </UserControl.Resources>
+    
+    <Border BorderBrush="Black" BorderThickness="1">
+        
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        
+            <Grid >
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Margin="5,5,5,5" Grid.Row="0">
+                    <GroupBox.Header>
+                        <TextBlock Text="Misc Options" FontWeight="Bold"/>
+                    </GroupBox.Header>
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Margin="5,5,5,5" Text="Significance For Trending:" Grid.Row="0" Grid.Column="0"/>
+                        <ComboBox ItemsSource="{Binding Source={local:Enumeration {x:Type local:SignificanceForTrending}}}" MinWidth="100" SelectedValue="{Binding SelectedSignificanceForTrending}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Grid.Row="0" Grid.Column="1"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Excluded Years:" Grid.Row="0" Grid.Column="2" />
+
+                        <comboBox:MultiSelectComboBox Margin="5,5,5,5"
+                       ItemsSource="{Binding ExcludedYears}" BorderBrush="LightBlue"
+                       SelectionMode="Multiple"
+                       SelectedItems="{Binding SelectedExcludedYears}"                                                 
+                       MinWidth="120" Width="Auto" Grid.Row="0" Grid.Column="3" >
+
+                            <comboBox:MultiSelectComboBox.DisplaySeparator>
+                                <Ellipse Margin="3,0" Height="4" Width="4" Fill="Black"/>
+                            </comboBox:MultiSelectComboBox.DisplaySeparator>
+
+                        </comboBox:MultiSelectComboBox>
+
+                        <TextBlock Margin="5,5,5,5" Text="Calamity Years:" Grid.Row="0" Grid.Column="4"/>
+
+                        <comboBox:MultiSelectComboBox Margin="5,5,5,5" 
+                       ItemsSource="{Binding CalamityYears}" BorderBrush="LightBlue"
+                       SelectionMode="Multiple"
+                       SelectedItems="{Binding SelectedCalamityYears}"                                                 
+                       MinWidth="120" Width="Auto" Grid.Row="0" Grid.Column="5" >
+
+                            <comboBox:MultiSelectComboBox.DisplaySeparator>
+                                <Ellipse Margin="3,0" Height="4" Width="4" Fill="Black"/>
+                            </comboBox:MultiSelectComboBox.DisplaySeparator>
+
+                        </comboBox:MultiSelectComboBox>
+
+                    </Grid>
+
+                </GroupBox>
+
+                <GroupBox Margin="5,5,5,5" Grid.Row="1">
+                    <GroupBox.Header>
+                        <TextBlock Text="Historical Analysis" FontWeight="Bold"/>
+                    </GroupBox.Header>
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Margin="5,5,5,5" Text="Data Processed:" Grid.Row="0" Grid.Column="0"/>
+                        <ComboBox ItemsSource="{Binding Source={local:Enumeration {x:Type local:DataProcessed}}}" MinWidth="100" SelectedValue="{Binding SelectedDataProcessed}" IsEnabled="False"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Name="cmbDataProcessed" Grid.Row="0" Grid.Column="1"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Data Gaps:" Grid.Row="0" Grid.Column="2" />
+                        <ComboBox ItemsSource="{Binding Source={local:Enumeration {x:Type local:DataGaps}}}" MinWidth="100" SelectedValue="{Binding SelectedDataGaps}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Name="cmbDataGaps" Grid.Row="0" Grid.Column="3"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Moving Average (Years):" Grid.Row="1" Grid.Column="0" />
+                        <ComboBox BorderBrush="LightBlue" Background="Transparent" ItemsSource="{Binding MovingAverageYears}"
+                     SelectedValue="{Binding MovingAverage}" Margin="5,5,5,5" Grid.Row="1" Grid.Column="1"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Minimum Years in Moving Average:" Grid.Row="1" Grid.Column="2" />
+                        <ComboBox BorderBrush="LightBlue" Background="Transparent" ItemsSource="{Binding MovingAverageYears}" IsEnabled="False"
+                        SelectedValue="{Binding MinimumMovingAvgYears}" Margin="5,5,5,5" Grid.Row="1" Grid.Column="3"/>
+
+                    </Grid>
+
+
+
+                </GroupBox>
+
+                <GroupBox Margin="5,5,5,5" Grid.Row="2">
+                    <GroupBox.Header>
+                        <TextBlock Text="Stochastic Analysis" FontWeight="Bold"/>
+                    </GroupBox.Header>
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Margin="5,5,5,5" Text="Correlation Input:" Grid.Row="1" Grid.Column="2"/>
+                        <ComboBox BorderBrush="LightBlue" Background="Transparent" ItemsSource="{Binding Source={local:Enumeration {x:Type local:ResultYieldGraphs}}}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value"
+                        SelectedValue="{Binding CorrelationInput}" Margin="5,5,5,5" Grid.Row="1" Grid.Column="3"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Correlation Outliers - Calamity Years:" Grid.Row="0" Grid.Column="0" />
+                        <ComboBox ItemsSource="{Binding Source={local:Enumeration {x:Type local:Calamity}}}" MinWidth="100" SelectedValue="{Binding SelectedCorrelationOutliers}" IsEnabled="False"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Grid.Row="0" Grid.Column="1"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Total Variation StDev:" Grid.Row="1" Grid.Column="0" />
+                        <ComboBox  ItemsSource="{Binding Source={local:Enumeration {x:Type local:StdDev}}}" MinWidth="100" SelectedValue="{Binding SelectedTotalVariationStdDev}" IsEnabled="False"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" />
+
+                        <TextBlock Margin="5,5,5,5" Text="Simulation Distribution:" Grid.Row="0" Grid.Column="2" />
+                        <ComboBox  ItemsSource="{Binding Source={local:Enumeration {x:Type local:SimulationDistribution}}}" MinWidth="100" SelectedValue="{Binding SelectedSimulationDistribution}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Grid.Row="0" Grid.Column="3"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="No of Simulation Points:" Grid.Row="0" Grid.Column="4" />
+                        <ComboBox BorderBrush="LightBlue" Background="Transparent" ItemsSource="{Binding Source={local:Enumeration {x:Type local:SimulationPoints}}}" IsEnabled="False"
+                              DisplayMemberPath="Description" SelectedValuePath="Value"
+                              SelectedValue="{Binding SelectedSimulationPoint}" Margin="2,2,2,10" Grid.Row="0" Grid.Column="5" />
+
+                        <TextBlock Margin="5,5,5,5" Text="Extreme Bound Methodology:" Grid.Row="2" Grid.Column="0" />
+                        <ComboBox  ItemsSource="{Binding Source={local:Enumeration {x:Type local:ExtremeBoundMethod}}}" MinWidth="100" SelectedValue="{Binding SelectedExtremeBoundMethodology}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Grid.Row="2" Grid.Column="1"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Below:" Grid.Row="2" Grid.Column="4" />
+                        <TextBox BorderBrush="LightBlue" PreviewMouseLeftButtonDown="SelectAll" GotFocus="TextBox_GotFocus" 
+                        Text="{Binding Below,
+                        UpdateSourceTrigger=PropertyChanged,
+                        ValidatesOnExceptions=True,
+                        TargetNullValue={x:Static sys:String.Empty}}" 
+                        Margin="5,5,5,5" Grid.Row="2" Grid.Column="5" MinWidth="100"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Above:" Grid.Row="2" Grid.Column="2" />
+                        <TextBox BorderBrush="LightBlue" PreviewMouseLeftButtonDown="SelectAll" GotFocus="TextBox_GotFocus" 
+                             Text="{Binding Above,
+                             UpdateSourceTrigger=PropertyChanged,
+                             ValidatesOnExceptions=True,
+                             TargetNullValue={x:Static sys:String.Empty}}" 
+                             Margin="5,5,5,5" Grid.Row="2" Grid.Column="3" MinWidth="100"/>
+
+                    </Grid>
+
+                </GroupBox>
+
+                <GroupBox Margin="5,5,5,5" Grid.Row="3">
+                    <GroupBox.Header>
+                        <TextBlock Text="Payout Aggregation" FontWeight="Bold"/>
+                    </GroupBox.Header>
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Margin="5,5,5,5" Text="Model:" Grid.Row="0" Grid.Column="0"/>
+                        <ComboBox ItemsSource="{Binding Source={local:Enumeration {x:Type local:Model}}}" MinWidth="100" SelectedValue="{Binding SelectedModel}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Grid.Row="0" Grid.Column="1"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Historical Method:" Grid.Row="0" Grid.Column="2"/>
+                        <ComboBox ItemsSource="{Binding Source={local:Enumeration {x:Type local:HistoricalMethod}}}" MinWidth="100" SelectedValue="{Binding SelectedHistoricalMethod}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Grid.Row="0" Grid.Column="3"/>
+
+                        <TextBlock Margin="5,5,5,5" Text="Simulation Method:" Grid.Row="0" Grid.Column="4"/>
+                        <ComboBox ItemsSource="{Binding Source={local:Enumeration {x:Type local:SimulationMethod}}}" MinWidth="100" SelectedValue="{Binding SelectedSimulationMethod}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                        Margin="5,5,5,5" Grid.Row="0" Grid.Column="5" />
+
+
+                    </Grid>
+
+
+                </GroupBox>
+
+            </Grid>
+        
+        </ScrollViewer>
+    
+    </Border>
+
+</UserControl>

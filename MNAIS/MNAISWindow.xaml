@@ -1,0 +1,191 @@
+﻿<Fluent:RibbonWindow x:Class="MNAIS.MNAISWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent"
+        xmlns:local="clr-namespace:MNAIS"    
+        xmlns:view ="clr-namespace:MNAIS.Views"        
+        Title="modified National Agricultural Insurance Scheme (mNAIS)"
+        Height="Auto" Width="Auto" MinWidth="600" MinHeight="600" Background="White"
+        WindowStartupLocation="CenterScreen" Icon="/MNAIS;component/Images/MNAIS.png" >
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Fluent:Ribbon x:Name="Ribbon" AutomaticStateManagement="True" Grid.Row="0" Grid.ColumnSpan="2">
+
+            <Fluent:RibbonTabItem Name="tbContract" ToolTip="Contract and Yield Data Management.">
+
+                <Fluent:RibbonTabItem.Header >
+                    <TextBlock MouseLeftButtonDown="ContractTab_MouseLeftButtonDown" Text="Contract">
+                        <TextBlock.Style>
+                            <Style>
+                                <Setter Property="TextBlock.Foreground" Value="Black"/>
+                                <Setter Property="TextBlock.FontWeight" Value="Bold"/>                                
+                            </Style>                            
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Fluent:RibbonTabItem.Header>
+
+                <Fluent:RibbonGroupBox>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Fluent:Button IsEnabled="{Binding IsCreateEnabled}" Margin="5,0,5,0" Header="Create Contract" Click="Create_Contract_Click" LargeIcon="Images\Add.png" Icon="Images\Add.png"></Fluent:Button>
+                        <Fluent:Button IsEnabled="{Binding IsDeleteEnabled}" Margin="5,0,5,0" Command="{Binding DeleteContractCommand}" Header="Delete Contract" LargeIcon="Images\delete.png" Icon="Images\delete.png"></Fluent:Button>
+                        
+                        <Fluent:Button Margin="5,0,5,0" Header="Import Contract" Click="Import_Contract_Click"  LargeIcon="Images\import.png" Icon="Images\import.png"></Fluent:Button>
+                        <Fluent:Button Margin="5,0,5,0" IsEnabled="{Binding IsDataImportEnabled}" Header="Export Contract" Click="Export_Contract_Click" LargeIcon="Images\export.png" Icon="Images\export.png"></Fluent:Button>
+                    </StackPanel>
+
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox>
+                    
+                    <Fluent:Button Margin="5,0,5,0" IsEnabled="{Binding IsDataImportEnabled}" Command="{Binding Path=ImportedYieldDataLoadCommand}"
+                                   Header="Crop Data" LargeIcon="Images\csv.png" Icon="Images\csv.png"></Fluent:Button>
+                    
+                </Fluent:RibbonGroupBox>
+
+            </Fluent:RibbonTabItem>
+
+            <Fluent:RibbonTabItem IsEnabled="{Binding IsAnalysisOptionsEnabled}" Name="tbAnalysis" ToolTip="Analysis Options Management." ToolTipService.ShowOnDisabled="True">
+
+                <Fluent:RibbonTabItem.Header>                    
+                    <TextBlock MouseLeftButtonDown="AnalysisTab_MouseLeftButtonDown" Text="Analysis Options">
+                        <TextBlock.Style>
+                            <Style>
+                                <Setter Property="TextBlock.Foreground" Value="Black"/>
+                                <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Fluent:RibbonTabItem.Header>
+
+                <Fluent:RibbonGroupBox>
+                    
+                    <StackPanel Orientation="Horizontal">
+
+                        <Fluent:Button Margin="5,0,5,0" Command="{Binding Path=ModellingOptionsLoadCommand}"
+                                       Header="Modelling Options" LargeIcon="Images\modelling.png" Icon="Images\modelling.png"></Fluent:Button>
+
+                        <Fluent:Button Margin="5,0,5,0" Command="{Binding Path=PricingOptionsLoadCommand}"
+                                       Header="Pricing Options" LargeIcon="Images\pricing.png" Icon="Images\pricing.png"></Fluent:Button>
+                    </StackPanel>
+                    
+                </Fluent:RibbonGroupBox>
+
+            </Fluent:RibbonTabItem>
+
+            <Fluent:RibbonTabItem IsEnabled="{Binding IsResultsEnabled}" Name="tbResults" ToolTip="Results Management." ToolTipService.ShowOnDisabled="True">
+                <Fluent:RibbonTabItem.Header>
+                    <TextBlock MouseLeftButtonDown="OutputTab_MouseLeftButtonDown" Text="Results">
+                        <TextBlock.Style>
+                            <Style>
+                                <Setter Property="TextBlock.Foreground" Value="Black"/>
+                                <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Fluent:RibbonTabItem.Header>
+
+                <Fluent:RibbonGroupBox Margin="5,0,5,0">
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Fluent:Button Margin="5,0,5,0" Header="Results" Command="{Binding Path=ResultSummaryLoadCommand}"
+                                       LargeIcon="Images\results.jpg" Icon="Images\results.jpg"></Fluent:Button>
+
+                        <Fluent:Button Margin="5,0,5,0" Header="Premium Charts" Command="{Binding Path=PremiumChartsLoadCommand}"
+                                       LargeIcon="Images\charts.png" Icon="Images\charts.png"></Fluent:Button>
+
+                        <Fluent:Button Margin="5,0,5,0" Header="Yield Graphs" Command="{Binding Path=YieldGraphsLoadCommand}"
+                                       LargeIcon="Images\graphs.png" Icon="Images\graphs.png"></Fluent:Button>
+
+                    </StackPanel>
+
+                </Fluent:RibbonGroupBox>
+
+            </Fluent:RibbonTabItem>
+
+            <Fluent:RibbonTabItem Name="tbAdministration">
+                <Fluent:RibbonTabItem.Header>
+                    <TextBlock MouseLeftButtonDown="AdminTab_MouseLeftButtonDown" Text="Administration">
+                        <TextBlock.Style>
+                            <Style>
+                                <Setter Property="TextBlock.Foreground" Value="Black"/>
+                                <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Fluent:RibbonTabItem.Header>
+
+                <Fluent:RibbonGroupBox Margin="5,0,5,0">
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <Fluent:Button Margin="5,0,5,0" Header="Settings" Command="{Binding Path=AdministrationLoadCommand}"
+                                       LargeIcon="Images\settings.png" Icon="Images\settings.png"></Fluent:Button>
+
+                    </StackPanel>
+
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+
+            <Fluent:Ribbon.QuickAccessItems>
+                <Fluent:QuickAccessMenuItem Header="Help" Command="{Binding HelpLoadCommand}"/>
+                <Fluent:QuickAccessMenuItem Header="About" Command="{Binding AboutLoadCommand}"/>
+                <Fluent:QuickAccessMenuItem Header="Exit" Command="{Binding ExitCommand}" />
+            </Fluent:Ribbon.QuickAccessItems>
+
+            <Fluent:Ribbon.ToolBarItems>
+                <Fluent:Button Size="Small" ToolTip="Click to see Help" Command="{Binding HelpLoadCommand}" Icon="Images/Help.png"/>
+                <Fluent:Button Size="Small" ToolTip="Click to see About" Command="{Binding AboutLoadCommand}" Icon="Images/About.png"/>
+            </Fluent:Ribbon.ToolBarItems>
+
+        </Fluent:Ribbon>
+
+        <ContentControl Name="c_contentControl" Width="Auto" Height="Auto" Focusable="False" Grid.Row="1" Grid.Column="1" 
+                        Content="{Binding PresenterContent}" IsTabStop="False"></ContentControl>
+
+        <ContentControl ScrollViewer.HorizontalScrollBarVisibility="Auto" Name="c_projectControl" Width="Auto" Height="Auto" Background="Transparent"
+           Focusable="False"  Grid.Row="1" Grid.Column="0" Content="{Binding ProjectInfoPresenter}" IsTabStop="False"></ContentControl>
+
+        <StatusBar Background="LightBlue" Grid.Row="2" Grid.ColumnSpan="2">
+            <TextBlock MinWidth="400"  HorizontalAlignment="Stretch" Text="{Binding Message,UpdateSourceTrigger=PropertyChanged}">
+                
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        
+                        <Setter Property="Foreground" Value="Black"/>            
+                        
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ErrType}" Value="Debug">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </DataTrigger>
+                            
+                            <DataTrigger Binding="{Binding ErrType}" Value="Warning">
+                                <Setter Property="Foreground" Value="RoyalBlue"/>
+                            </DataTrigger>
+                            
+                            <DataTrigger Binding="{Binding ErrType}" Value="Error">
+                                <Setter Property="Foreground" Value="Red"/>                                
+                            </DataTrigger>                           
+                            
+                        </Style.Triggers>            
+                    </Style>
+                </TextBlock.Style>               
+            </TextBlock>
+        </StatusBar>
+
+    </Grid>
+
+</Fluent:RibbonWindow>

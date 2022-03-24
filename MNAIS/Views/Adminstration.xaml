@@ -1,0 +1,157 @@
+﻿<UserControl x:Class="MNAIS.Adminstration"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:MNAIS"             
+             xmlns:utility="clr-namespace:MNAIS.Utility"
+             Height="Auto" Width="Auto">
+        
+    <UserControl.Resources>
+        <utility:BoolConverter x:Key="BoolConverter"/>
+    </UserControl.Resources>
+    
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Grid.Row="0" Grid.Column="0" Margin="5,5,5,5">
+                <GroupBox.Header>
+                    <TextBlock Text="Administration Options" FontWeight="Bold"/>
+                </GroupBox.Header>
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Margin="5,5,5,5" Text="Product License Status :" />
+                    <TextBlock Margin="5,5,5,5" Grid.Row="0" Grid.Column="1" Text="{Binding LicenseStatus}" Visibility="{Binding}" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0"  Margin="5,5,5,5" Text="Product Language :" ></TextBlock>
+
+                    <ComboBox Grid.Row="1" Grid.Column="1"  Margin="5,5,5,5" MinWidth="100" Name="c_Language"
+                         ItemsSource="{Binding Source={local:Enumeration {x:Type local:Language}}}" BorderBrush="LightBlue" Background="Transparent"
+                                    DisplayMemberPath="Description" SelectedValuePath="Value">
+
+                        <ComboBox.SelectedValue>
+                            <Binding Path="SelectedLanguage" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                        </ComboBox.SelectedValue>
+
+                    </ComboBox>
+
+                    <TextBlock Margin="5,5,5,5" Grid.Row="2" Grid.Column="0" Text="Product Log Location :" HorizontalAlignment="Left" Width="Auto" Height="Auto"></TextBlock>
+
+                    <Grid Grid.Row="2" Grid.Column="1" IsEnabled="{Binding IsLogFileLocationEnabled}">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Name="c_LogFile" Margin="5,5,5,5" Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" Width="Auto" MinWidth="220" IsReadOnly="True"
+                              Text="{Binding LogFilePath, UpdateSourceTrigger= PropertyChanged}" ></TextBox>
+
+                        <Button BorderBrush="LightBlue" Background="Transparent" Grid.Column="1" Margin="0,5,5,5" Content="Browse" 
+                            Command="{Binding LogFileBrowseCommand}" Width="80" Height="Auto" HorizontalAlignment="Right">
+
+                        </Button>
+
+                    </Grid>
+
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Grid.Row="1" Grid.Column="0" Margin="5,5,5,5">
+                <GroupBox.Header>
+                    <TextBlock Text="Result Options" FontWeight="Bold"/>
+                </GroupBox.Header>
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Margin="5,5,5,5" Text="Precision (in decimals):"/>
+                    <TextBox ToolTip="Enter no of digits to see after decimal." Margin="5,5,5,5" Grid.Row="0" Grid.Column="1" Text="{Binding SelectedPrecision}"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0"  Margin="5,5,5,5" Text="Display as  :" ></TextBlock>
+                    <ComboBox ToolTip="Choose how to display results." Grid.Row="1" Grid.Column="1"  Margin="5,5,5,5" 
+                          ItemsSource="{Binding Source={local:Enumeration {x:Type local:ResultsDisplay}}}" BorderBrush="LightBlue" Background="Transparent"
+                          DisplayMemberPath="Description" SelectedValuePath="Value">
+                        <ComboBox.SelectedValue>
+                            <Binding Path="SelectedResultsDisplayOption" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                        </ComboBox.SelectedValue>
+                    </ComboBox>
+
+                </Grid>
+
+            </GroupBox>
+
+            <GroupBox Grid.Row="2" Grid.Column="0" Margin="5,5,5,5">
+                <GroupBox.Header>
+                    <TextBlock Text="Debugging Options" FontWeight="Bold"/>
+                </GroupBox.Header>
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0"  Margin="5,5,5,5" Text="Generate Log Files :"/>
+                    <StackPanel ToolTip="Choose option to generate log files." Margin="5,5,5,5" Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <CheckBox Content="Yes" Margin="5,5,5,5" IsChecked="{Binding GenerateLogFile}"/>
+                        <CheckBox Content="No" Margin="35,5,5,5" IsChecked="{Binding GenerateLogFile, Converter={StaticResource BoolConverter}}"/>                        
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0"  Margin="5,5,5,5" Text="Show Messages :" ></TextBlock>
+                    <StackPanel ToolTip="Choose option to show messages." Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <CheckBox Content="Yes" Margin="5,5,5,5" IsChecked="{Binding ShowMessages}"/>
+                        <CheckBox Content="No" Margin="35,5,5,5" IsChecked="{Binding ShowMessages, Converter={StaticResource BoolConverter}}"/>
+                    </StackPanel>
+
+                </Grid>
+
+            </GroupBox>
+
+        </Grid>
+
+    </ScrollViewer>
+
+</UserControl>

@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6FA44090-F4EC-4126-99CE-299340EEE036}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MNAIS</RootNamespace>
+    <AssemblyName>MNAIS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fluent, Version=2.1.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyDLL\Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MultiSelectComboBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyDLL\MultiSelectComboBox.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyDLL\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyDLL\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="VerifyLicense, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyDLL\VerifyLicense.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyDLL\WPFToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Analytics\Analytics.cs" />
+    <Compile Include="Analytics\BetaInverse.cs" />
+    <Compile Include="Analytics\Core.cs" />
+    <Compile Include="Analytics\LogNormalDistribution.cs" />
+    <Compile Include="Analytics\Model.cs" />
+    <Compile Include="Analytics\NormalDistribution.cs" />
+    <Compile Include="Analytics\NormInverse.cs" />
+    <Compile Include="Analytics\Utility.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Enums\Enums.cs" />
+    <Compile Include="MNAISWindow.xaml.cs">
+      <DependentUpon>MNAISWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ContractStructure.cs" />
+    <Compile Include="Model\ImportedData.cs" />
+    <Compile Include="Model\ResultStructure.cs" />
+    <Compile Include="Model\SystemInfo.cs" />
+    <Compile Include="Resources\MNAISResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MNAISResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MNAISResources.ru-RU.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MNAISResources.ru-RU.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\BoolConverter.cs" />
+    <Compile Include="Utility\Constants.cs" />
+    <Compile Include="Utility\DataGridDynamicColumn.cs" />
+    <Compile Include="Utility\EnumDescriptionConverter.cs" />
+    <Compile Include="Utility\EnumerationExtension.cs" />
+    <Compile Include="Utility\ImportDataComparer.cs" />
+    <Compile Include="Utility\LocalizableDescription.cs" />
+    <Compile Include="Utility\Logging.cs" />
+    <Compile Include="Utility\PercentageConverter.cs" />
+    <Compile Include="Utility\UpdateConfiguration.cs" />
+    <Compile Include="Utility\Utility.cs" />
+    <Compile Include="ViewModel\AdministrationViewModel.cs" />
+    <Compile Include="ViewModel\ModellingOptionsViewModel.cs" />
+    <Compile Include="ViewModel\PremiumChartsViewModel.cs" />
+    <Compile Include="ViewModel\CreateContractViewModel.cs" />
+    <Compile Include="ViewModel\PricingOptionsViewModel.cs" />
+    <Compile Include="ViewModel\ResultsSummaryViewModel.cs" />
+    <Compile Include="ViewModel\YieldGraphsViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ImportDataViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Adminstration.xaml.cs">
+      <DependentUpon>Adminstration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContractInformation.xaml.cs">
+      <DependentUpon>ContractInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateContract.xaml.cs">
+      <DependentUpon>CreateContract.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LicenseRequest.xaml.cs">
+      <DependentUpon>LicenseRequest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PremiumCharts.xaml.cs">
+      <DependentUpon>PremiumCharts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ResultsSummary.xaml.cs">
+      <DependentUpon>ResultsSummary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PricingOptions.xaml.cs">
+      <DependentUpon>PricingOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModellingOptions.xaml.cs">
+      <DependentUpon>ModellingOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImportData.xaml.cs">
+      <DependentUpon>ImportData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\YieldGraphs.xaml.cs">
+      <DependentUpon>YieldGraphs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="MNAISWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Adminstration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContractInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateContract.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LicenseRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PremiumCharts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ResultsSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PricingOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModellingOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ImportData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\YieldGraphs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MNAISResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MNAISResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MNAISResources.ru-RU.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MNAISResources.ru-RU.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MNAIS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MNAIS.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\import.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Controls\MultiSelectComboBox.dll" />
+    <Resource Include="Images\AboutMNAIS.jpg" />
+    <Resource Include="Images\charts.png" />
+    <Resource Include="Images\graphs.png" />
+    <Resource Include="Images\results.jpg" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\settings.png" />
+    <Resource Include="Images\modelling.png" />
+    <Resource Include="Images\pricing.png" />
+    <Resource Include="Images\csv.png" />
+    <Resource Include="Images\Add.png" />
+    <Resource Include="Images\About.png" />
+    <Resource Include="Images\Help.png" />
+    <Resource Include="Images\Home.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Include\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

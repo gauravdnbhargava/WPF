@@ -1,0 +1,26 @@
+<License>
+  <MachineDescription>NOLT0163.rms.com HP EliteBook 8460p Hewlett-Packard</MachineDescription>
+  <MotherboardID>PCCKB00QE1K9X3</MotherboardID>
+  <ProcessorID>BFEBFBFF000206A7</ProcessorID>
+  <ClientName>ARC_Internal</ClientName>
+  <ProductName>mNAIS_Lite</ProductName>
+  <FeatureSet>All</FeatureSet>
+  <ExpirationDate>2015-06-18 00:00:00Z</ExpirationDate>
+  <ExpirationDateInternal>5247387842427387904</ExpirationDateInternal>
+  <ExpirationWarningPeriod>30</ExpirationWarningPeriod>
+  <ExpirationGracePeriod>15</ExpirationGracePeriod>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>ihentNATvIU13SBNDFmXQm5eVVY=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>FeuF0q4j7e5EofjsXgHZwKi4u+MXXLqrH9b45jgDnHD/ffcvFBsH+rRZJ2BsMzRJxnDdl6qz7kl7i1eAihu7SMhiFseDzwMmz+zIr3jrJSHnSpkoCFoDAmM8qeyQ80Pe/TiIF1njjXtbqahvesADEq4BZDssQ97Rcdt38QY1F4E=</SignatureValue>
+  </Signature>
+</License>

@@ -1,0 +1,219 @@
+﻿<UserControl x:Class="MNAIS.Views.CreateContract"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:MNAIS"  
+             Height="Auto" Width="Auto">
+
+    <UserControl.Resources>
+
+        <Style x:Key="{x:Type ToolTip}" TargetType="ToolTip">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="HasDropShadow" Value="True"/>            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <Border Name="Border"
+          Background="AliceBlue"
+          BorderBrush="Black"          
+          BorderThickness="1"
+          Width="{TemplateBinding Width}"
+          Height="{TemplateBinding Height}">
+                            <ContentPresenter                                
+            Margin="4" 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasDropShadow" Value="true">
+                                <Setter TargetName="Border" Property="CornerRadius" Value="4"/>
+                                <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="{x:Type DatePicker}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="Red" BorderThickness="2">
+                            <AdornedElementPlaceholder Name="MyAdorner" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="DatePicker.ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, 
+                       Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+        
+        <Style TargetType="{x:Type TextBox}">
+
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border BorderBrush="Red" BorderThickness="2">
+                            <AdornedElementPlaceholder Name="MyAdorner" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, 
+                       Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <VisualBrush Stretch="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock Text="Enter value" Foreground="Gray"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="{x:Null}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <VisualBrush Stretch="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock Text="Enter value" Foreground="Gray"/>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsFocused}" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <VisualBrush Stretch="None">
+                            </VisualBrush>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+    </UserControl.Resources>
+
+    <Border BorderBrush="Black" BorderThickness="1">
+
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>                
+            </Grid.RowDefinitions>
+
+            <GroupBox Margin="5,5,5,5" Grid.Row="0">
+                <GroupBox.Header>
+                    <TextBlock Text="Policy Information" FontWeight="Bold"/>
+                </GroupBox.Header>
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Margin="5,5,5,5" Text="Contract Name:" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox BorderBrush="LightBlue" PreviewMouseLeftButtonDown="SelectAll" GotFocus="TextBox_GotFocus"
+                             Text="{Binding ContractName, UpdateSourceTrigger=PropertyChanged,ValidatesOnExceptions=True}" 
+                             Margin="5,5,5,5" Grid.Row="0" Grid.Column="1" MinWidth="130" MaxWidth="200"/>
+
+                    <TextBlock Margin="5,5,5,5" Text="Contract Year:" Grid.Row="0" Grid.Column="3"/>
+                    <TextBox BorderBrush="LightBlue" PreviewMouseLeftButtonDown="SelectAll" GotFocus="TextBox_GotFocus"
+                             Text="{Binding ContractYear, 
+                             UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True,                             
+                             TargetNullValue={x:Static sys:String.Empty}}"
+                             Margin="5,5,5,5" Grid.Row="0" Grid.Column="4" MinWidth="130" MaxWidth="200"/>
+
+                    <TextBlock Margin="5,5,5,5" Text="Policy Start Date:" Grid.Row="1" Grid.Column="0"/>
+                    <DatePicker BorderBrush="LightBlue" SelectedDate="{Binding PolicyStartDate,ValidatesOnExceptions=True}" 
+                                Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" MinWidth="100"/>
+
+                    <TextBlock Margin="5,5,5,5" Text="Policy End Date:" Grid.Row="1" Grid.Column="3"/>
+                    <DatePicker BorderBrush="LightBlue" SelectedDate="{Binding PolicyEndDate,ValidatesOnExceptions=True}" 
+                                Margin="5,5,5,5" Grid.Row="1" Grid.Column="4" MinWidth="100"/>
+
+
+
+                    <TextBlock Margin="5,5,5,5" Text="Season:" Grid.Row="2" Grid.Column="0"/>
+                    <ComboBox ToolTip="Select Season"
+                        Margin="5,5,5,5" ItemsSource="{Binding Source={local:Enumeration {x:Type local:Season}}}" MinWidth="100" SelectedValue="{Binding SelectedSeason}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                              Grid.Row="2" Grid.Column="1"/>
+
+                    <TextBlock Margin="5,5,5,5" Text="Crop:" Grid.Row="2" Grid.Column="3"/>
+                    <ComboBox Margin="5,5,5,5" ItemsSource="{Binding Source={local:Enumeration {x:Type local:Crop}}}" MinWidth="100" SelectedValue="{Binding SelectedCrop}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" BorderBrush="LightBlue" Background="Transparent"
+                              Grid.Row="2" Grid.Column="4"/>
+
+                    <TextBlock Margin="5,5,5,5" Text="Data Source:" Grid.Row="3" Grid.Column="0"/>
+                    <ComboBox Margin="5,5,5,5" BorderBrush="LightBlue" Background="Transparent"
+                              ItemsSource="{Binding Source={local:Enumeration {x:Type local:DataSource}}}" MinWidth="100" SelectedValue="{Binding SelectedDataSource}"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" Grid.Row="3" Grid.Column="1" />
+
+                    <TextBlock Margin="5,5,5,5" Text="Indemnity Level:" Grid.Row="3" Grid.Column="3"/>
+                    <ComboBox Margin="5,5,5,5" Grid.Row="3" Grid.Column="4" BorderBrush="LightBlue" Background="Transparent"
+                              ItemsSource="{Binding Source={local:Enumeration {x:Type local:IndemnityLevel}}}" SelectedValue="{Binding SelectedIndemnityLevel}"
+                              MinWidth="100" DisplayMemberPath="Description" SelectedValuePath="Value"/>
+
+
+                    <TextBlock Margin="5,5,5,5" Text="State:" Grid.Row="4" Grid.Column="0"/>
+                    <ComboBox Margin="5,5,5,5" ItemsSource="{Binding Source={local:Enumeration {x:Type local:State}}}" MinWidth="100" BorderBrush="LightBlue" Background="Transparent"
+                        DisplayMemberPath="Description" SelectedValuePath="Value" SelectedValue="{Binding SelectedState, UpdateSourceTrigger=PropertyChanged}"
+                              Grid.Row="4" Grid.Column="1"/>
+
+                    <TextBlock Margin="5,5,5,5" Text="District:" Grid.Row="4" Grid.Column="3"/>
+                    <ComboBox Name="cmbDistrict" BorderBrush="LightBlue" Background="Transparent"
+                              SelectedItem="{Binding SelectedDistrict, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding District}"
+                              Margin="5,5,5,5" Grid.Row="4" Grid.Column="4" MinWidth="100"/>
+
+                </Grid>
+            </GroupBox>
+
+            <StackPanel Orientation="Horizontal" Margin="5,5,5,5" Grid.Row="1" HorizontalAlignment="Center">
+                <Button Command="{Binding SaveCommand}" IsEnabled="{Binding IsSaveEnabled}" BorderBrush="LightBlue" Background="Transparent" Content="Save Contract" Width="250" Margin="5,5,5,5"/>
+            </StackPanel>
+            
+        </Grid>
+
+      </ScrollViewer>
+
+    </Border>
+
+</UserControl>
